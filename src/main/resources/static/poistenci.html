@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InsuredCare</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-10">
+        <a class="navbar-brand" href="#">InsuredCare</a>
+        <div class="d-none d-lg-block text-white mx-5">
+            <span><strong>Telefón:</strong> +421 900 123 456</span> |
+            <span><strong>Email:</strong> insuredCare@poistenie.com</span>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Domov</a></li>
+                <li class="nav-item"><a class="nav-link" href="Onás.html">O nás</a></li>
+                <li class="nav-item"><a class="nav-link" href="poistenci.html">Poistenci</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="Onás.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Poradiť</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="zivotnepoistenie.html">Životné poistenie</a></li>
+                        <li><a class="dropdown-item" href="poisteniemajetku.html">Poistenie majetku</a></li>
+                        <li><a class="dropdown-item" href="cestovnepoistenie.html">Cestovné poistenie</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="Poisteny.html">Admin</a></li>
+                <li class="nav-item"><a class="nav-link" href="Prihlasitsa.html">Odhlásiť sa</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container px-4 px-lg-5">
+    <h1>Poistenci</h1>
+    <button id="novyPoistenec">Nový poistenec</button>
+
+    <!-- Loading state -->
+    <div id="loading" style="display: none;">Načítavam...</div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Meno</th>
+            <th>Priezvisko</th>
+            <th>Adresa</th>
+            <th>Akcie</th>
+        </tr>
+        </thead>
+        <tbody id="poistenci-list"></tbody>
+    </table>
+</div>
+<footer class="py-5 bg-dark">
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+</footer>
+<!-- Footer -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        nacitajPoistencov();
+    });
+
+    // Načítanie poistencov z localStorage
+    function nacitajPoistencov() {
+        const loading = document.getElementById("loading");
+        const tbody = document.getElementById("poistenci-list");
+
+        loading.style.display = "block"; // Zobraziť loading
+        tbody.innerHTML = ""; // Vyprázdniť tabuľku
+
+        // Získaj poistencov z localStorage, alebo prázdny zoznam
+        const poistenci = JSON.parse(localStorage.getItem("poistenci")) || [];
+
+        loading.style.display = "none"; // Skryť loading
+        if (poistenci.length === 0) {
+            tbody.innerHTML = "<tr><td colspan='4'>Žiadni poistenci</td></tr>";
+            return;
+        }
+
+        // Zobraziť poistencov v tabuľke
+        poistenci.forEach(poistenec => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${poistenec.meno || "Nezadané meno"}</td>
+                <td>${poistenec.priezvisko || "Nezadané priezvisko"}</td>
+                <td>${poistenec.adresa || "Nezadaná adresa"}</td>
+                <td>
+                    <button onclick="odstranitPoistenca('${poistenec.meno}', '${poistenec.priezvisko}')">Odstrániť</button>
+                </td>`;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Pridať nového poistenca
+    document.getElementById("novyPoistenec").addEventListener("click", function () {
+        const meno = prompt("Zadajte meno:");
+        const priezvisko = prompt("Zadajte priezvisko:");
+        const adresa = prompt("Zadajte adresu:");
+
+        if (!meno || !priezvisko) {
+            alert("Meno a priezvisko sú povinné!");
+            return;
+        }
+
+        const poistenec = { meno, priezvisko, adresa };
+
+        // Načítaj existujúcich poistencov z localStorage
+        const poistenci = JSON.parse(localStorage.getItem("poistenci")) || [];
+
+        // Pridaj nového poistenca do zoznamu
+        poistenci.push(poistenec);
+
+        // Ulož nový zoznam poistencov do localStorage
+        localStorage.setItem("poistenci", JSON.stringify(poistenci));
+
+        alert("Poistenec bol úspešne pridaný!");
+        nacitajPoistencov(); // Obnov tabuľku
+    });
+
+    // Odstránenie poistenca
+    function odstranitPoistenca(meno, priezvisko) {
+        if (confirm(`Naozaj chcete odstrániť poisteného ${meno} ${priezvisko}?`)) {
+            // Načítaj existujúcich poistencov
+            const poistenci = JSON.parse(localStorage.getItem("poistenci")) || [];
+
+
+            const updatedPoistenci = poistenci.filter(poistenec => poistenec.meno !== meno || poistenec.priezvisko !== priezvisko);
+
+
+            localStorage.setItem("poistenci", JSON.stringify(updatedPoistenci));
+
+            alert("Poistenec bol odstránený");
+            nacitajPoistencov();
+        }
+    }
+</script>
+</body>
+</html>
+
+
+

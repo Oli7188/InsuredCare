@@ -1,0 +1,48 @@
+openapi: 3.1.0
+info:
+  title: InsuredCARE API
+  description: API pre projekt InsuredCARE
+  version: 1.0.0
+servers:
+  - url: 'https://localhost:8080/api/poisteni'
+paths:
+  /example:
+    get:
+      summary: Example endpoint
+      description: An example endpoint description
+      responses:
+        '200':
+          description: Successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Hello, world!"
+  /users:
+    get:
+      summary: Retrieve all users
+      description: Endpoint na získanie všetkých používateľov
+      responses:
+        '200':
+          description: Successfully retrieved users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    example:
+                      id: 1
+                      name: "John Doe"
+                      email: "john.doe@example.com"
+

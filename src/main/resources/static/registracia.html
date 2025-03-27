@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registrácia - InsuredCare</title>
+    <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <a class="navbar-brand" href="#!">InsuredCare</a>
+        <div class="d-none d-lg-block text-white mx-5">
+            <span><strong>Telefón:</strong> +421 900 123 456</span> |
+            <span><strong>Email:</strong> insuredCare@poistenie.com</span>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Domov</a></li>
+                <li class="nav-item"><a class="nav-link" href="Onás.html">O nás</a></li>
+                <li class="nav-item"><a class="nav-link" href="poistenci.html">Poistenci</a></li>
+                <li class="nav-item"><a class="nav-link" href="Prihlasitsa.html">Prihlásiť sa</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Obsah stránky -->
+<div class="container px-4 px-lg-5">
+    <h1 class="my-4">Registrácia nového poistenca</h1>
+
+    <form id="registerForm" action="api/poisteny/register" method="POST">
+        <label for="firstName">Meno:</label>
+        <input type="text" id="firstName" name="firstName" class="form-control" required />
+
+        <label for="lastName">Priezvisko:</label>
+        <input type="text" id="lastName" name="lastName" class="form-control" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" class="form-control" required />
+
+        <label for="phone">Telefon:</label>
+        <input type="text" id="phone" name="phone" class="form-control" required />
+
+        <label for="street">Ulica a č.p.:</label>
+        <input type="text" id="street" name="street" class="form-control" required />
+
+        <label for="city">Mesto:</label>
+        <input type="text" id="city" name="city" class="form-control" required />
+
+        <label for="postalCode">PSČ:</label>
+        <input type="text" id="postalCode" name="postalCode" class="form-control" required />
+
+        <label for="password">Heslo:</label>
+        <input type="password" id="password" name="password" class="form-control" required />
+
+        <label>Typ poistenia:</label><br>
+        <input type="checkbox" id="lifeInsurance" name="insuranceTypes" value="Životné">
+        <label for="lifeInsurance"> Životné poistenie</label><br>
+
+        <input type="checkbox" id="propertyInsurance" name="insuranceTypes" value="Majetkové">
+        <label for="propertyInsurance"> Poistenie majetku</label><br>
+
+        <input type="checkbox" id="travelInsurance" name="insuranceTypes" value="Cestovné">
+        <label for="travelInsurance"> Cestovné poistenie</label><br>
+
+        <button type="submit" class="btn btn-primary mt-3">Registrovať</button>
+    </form>
+</div>
+
+
+<div class="card text-white bg-secondary my-5 py-4 text-center">
+    <div class="card-body"><p class="text-white m-0">Vaša budúcnosť v bezpečí – vyberte si správne poistenie.</p></div>
+</div>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2025</p></div>
+</footer>
+
+<!-- Bootstrap core JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Form submit JavaScript -->
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Zastaví odoslanie formulára
+        alert('Registrácia úspešná!'); // Zobrazí upozornenie
+        window.location.href = 'Prihlasitsa.html'; // Presmeruje na stránku prihlásenia
+    });
+</script>
+
+<!-- Dropdown menu fix -->
+<script>
+    document.getElementById('navbarDropdown').addEventListener('click', function(event) {
+        var dropdownMenu = this.nextElementSibling;
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        event.preventDefault();
+    });
+</script>
+
+<!-- Custom scripts -->
+<script src="scripts.js"></script>
+
+</body>
+</html>
+

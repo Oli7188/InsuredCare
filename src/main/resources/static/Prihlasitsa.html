@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>InsuredCare - Prihlásenie</title>
+  <link href="styles.css" rel="stylesheet" />
+  <style>
+    /* Uistíme sa, že stránka využije celú výšku obrazovky */
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Urobíme kontajner (obsah) flexibilný, aby zaberali všetku dostupnú výšku */
+    .container {
+      flex: 1;
+    }
+
+    footer {
+      margin-top: auto; /* Umiestni footer na spodok */
+    }
+  </style>
+</head>
+<body>
+
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container px-5">
+    <a class="navbar-brand" href="#!">InsuredCare</a>
+    <div class="d-none d-lg-block text-white mx-5">
+      <span><strong>Telefón:</strong> +421 900 123 456</span> |
+      <span><strong>Email:</strong> insuredCare@poistenie.com</span>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Domov</a></li>
+        <li class="nav-item"><a class="nav-link" href="Onás.html">O nás</a></li>
+        <a class="nav-link dropdown-toggle" href="Poradit.html" id="navbarDropdown" role="button">
+          Poradiť
+        </a>
+        <ul class="dropdown-menu position-absolute" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="zivotnepoistenie.html">Životné poistenie</a></li>
+          <li><a class="dropdown-item" href="poisteniemajetku.html">Poistenie majetku</a></li>
+          <li><a class="dropdown-item" href="cestovnepoistenie.html">Cestovné poistenie</a></li>
+        </ul>
+        </li>
+      </ul>
+    </div>
+    <li class="nav-item"><a class="nav-link" href="Prihlasitsa.html">Prihlásiť sa</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Page Content-->
+<div class="container px-4 px-lg-5">
+  <!-- Heading Row-->
+  <div class="row gx-4 gx-lg-5 align-items-center my-5">
+    <div class="col-lg-7"><img class="fotka" src="insurance-7065113_1280.png" alt="..." /></div>
+    <div class="col-lg-5">
+      <h1 class="font-weight-light">Prihlásiť sa</h1>
+      <!-- Formulár prihlásenia -->
+      <form id="loginForm">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required />
+
+        <label for="password" class="form-label">Heslo</label>
+        <input type="password" class="form-control" id="password" name="password" aria-describedby="emailHelp" required />
+
+        <button type="submit" class="btn btn-primary">Prihlásiť sa</button>
+      </form>
+
+      <!-- Text informujúci o registrácii -->
+      <p class="mt-3">Ešte nie ste zaregistrovaní?
+        <!-- Tlačidlo na registráciu -->
+        <button onclick="window.location.href='registracia.html'" class="btn btn-secondary mt-2">Zaregistrovať sa</button>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+  <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+</footer>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript pre prihlásenie -->
+<script>
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Zabránime odoslaniu formulára (stránka sa neobnoví)
+
+    // Získaj údaje z formulára
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    // Falošná autentifikácia
+    if (email === 'admin@example.com' && password === 'admin123') {
+      // Ak sú údaje správne, presmeruj na admin stránku
+      window.location.href = 'poisteny.html';
+    } else {
+      alert('Nesprávne prihlasovacie údaje!');
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
